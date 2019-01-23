@@ -1,0 +1,222 @@
+///////
+//Minxins
+///////
+$break-small: 320px;
+$break-large: 1024px;
+@mixin m-query($media) {
+    @if $media==movel {
+        @media only screen and (max-width: $break-small) {
+            @content;
+        }
+    }
+    @else if $media==medio {
+        @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) {
+            @content;
+        }
+    }
+}
+
+@mixin text-shadows($blur:1px) {
+    text-shadow: -1px -1px $blur #000, 1px -1px $blur #000, -1px 1px $blur #000, 1px 1px $blur #000;
+}
+
+@mixin text-white-shadows($blur:1px) {
+    text-shadow: -1px -1px $blur #fff, 1px -1px $blur #fff, -1px 1px $blur #fff, 1px 1px $blur #fff;
+}
+
+@mixin box-white-shadows($blur:3px) {
+    box-shadow: -4px -1px $blur rgb(255, 255, 255);
+}
+
+@mixin trasition-effect($element:opacity, $time:500ms, $effect:ease-in) {
+    -webkit-transition: $element $time $effect;
+    -moz-transition: $element $time $effect;
+    -ms-transition: $element $time $effect;
+    -o-transition: $element $time $effect;
+    transition: $element $time $effect;
+}
+
+@mixin center-el($percentage:-50%) {
+    -ms-transform: translateY($percentage);
+    transform: translateY($percentage);
+}
+
+@mixin hr-gradient($middle-color:#8c8b8b) {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, transparent, $middle-color, transparent);
+    background-image: -moz-linear-gradient(left, transparent, $middle-color, transparent);
+    background-image: -ms-linear-gradient(left, transparent, $middle-color, transparent);
+    background-image: -o-linear-gradient(left, transparent, $middle-color, transparent);
+}
+
+///////
+//Keyframes
+///////
+@keyframes type-e {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+//////////////
+//background
+$background-margin-right: 5%;
+$background-margin-left: 5%;
+//Jumbotron
+$jumbotron-height: 20rem;
+/////////////
+////////////
+///////////
+//Títulos ou letras grandes font-family: 'Lora', serif;
+//Textos font-family: 'Amatic SC', cursive;
+//Textos pequenos ou descrições font-family: 'EB Garamond', serif;
+//Body
+body {
+    margin-right: $background-margin-right;
+    margin-left: $background-margin-left;
+    position: relative;
+    @include m-query(movel) {
+        margin: 0;
+    }
+}
+
+.hr-gradient {
+    @include hr-gradient();
+}
+
+//Jumbotron
+.jumbotron {
+    background-color: transparent;
+    text-align: center;
+    height: $jumbotron-height;
+    opacity: 0.8;
+}
+
+.jumbotitle {
+    font-family: 'Times New Roman', condensed bold;
+    font-size: 4rem;
+    color: #000000a2;
+    @include text-white-shadows();
+    @include m-query(movel) {
+        font-size: 2.5rem;
+    }
+    @include m-query(medio) {
+        font-size: 2.5rem;
+    }
+}
+
+.title {
+    font-family: 'Lora', serif;
+    @include text-shadows(5px)
+}
+
+.typetext {
+    animation: type-e 0.5s infinite alternate;
+    color: #000000;
+    font-size: 1.5rem;
+    color: #ffffff;
+    @include text-shadows(1px);
+}
+
+.lead {
+    color: #ffffff;
+    @include text-shadows(1px);
+}
+
+.hr {
+    @include box-white-shadows();
+}
+
+//backgrounds
+.bgvideo {
+    position: fixed;
+    background-attachment: fixed;
+    z-index: -1000;
+    & video {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        display: block;
+        @include m-query(movel) {
+            min-width: 10%;
+            min-height: 10%;
+        }
+    }
+}
+
+//menu & content
+.menu {
+    position: relative;
+}
+
+#navbar {
+    min-width: 100%;
+}
+
+.badge {
+    animation: type-e 1s infinite alternate;
+}
+
+.nav {
+    border-radius: 10px;
+    border-style: none;
+    min-width: 100%;
+    background-color: #00000085;
+}
+
+// .nav-pills {
+//     background-color: #00000085;
+// }
+.nav-link {
+    margin: 2px;
+    &.active {
+        @include trasition-effect(background-color, 1s);
+    }
+}
+
+$items: item-1,
+item-2,
+item-3,
+item-4;
+$i: 1;
+@each $item in $items {
+    .#{$item} {
+        opacity: 0.4;
+        background-image: url(../media/b#{$i}.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        @if ($item==item-1) {
+            color: rgb(62, 123, 253);
+        }
+        @else if ($item==item-2) {
+            color: rgb(255, 136, 0);
+        }
+        @else if ($item==item-3) {
+            color: rgb(118, 205, 255);
+        }
+        @else {
+            color: rgb(245, 109, 132);
+        }
+        @include text-shadows(1px);
+        &:hover {
+            opacity: 1;
+            color: white;
+        }
+        &.active {
+            opacity: 1;
+            color: white;
+            @include trasition-effect();
+        }
+    }
+    $i: $i+1;
+}
+
+.fas {
+    margin-right: 5px;
+}
