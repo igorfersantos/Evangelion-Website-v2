@@ -1,7 +1,6 @@
 Segunda versão do site de evangelion, ainda em desenvolvimento, e agora com Javascript ES6+, Bootstrap e uma pré-build css em Sass.
 Ele ainda está bem rudimentar, então não espere muita coisa para explorar nessa página. 
 Ainda sim, espero que goste do pouco que já está feito.
-
 --
 
 Obs: 
